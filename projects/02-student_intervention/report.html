@@ -11853,7 +11853,7 @@ This is a classification problem because we have a binary outcome, where a stude
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">student_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -11867,7 +11867,7 @@ This is a classification problem because we have a binary outcome, where a stude
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11882,7 +11882,7 @@ This is a classification problem because we have a binary outcome, where a stude
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Calculate number of students</span>
@@ -11898,7 +11898,7 @@ This is a classification problem because we have a binary outcome, where a stude
 <span class="n">n_failed</span> <span class="o">=</span> <span class="n">n_students</span> <span class="o">-</span> <span class="n">n_passed</span>
 
 <span class="c1"># TODO: Calculate graduation rate</span>
-<span class="n">grad_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span><span class="o">/</span><span class="n">n_students</span>
+<span class="n">grad_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="o">/</span><span class="n">n_students</span>
 
 <span class="c1"># Print the results</span>
 <span class="k">print</span> <span class="s2">&quot;Total number of students: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_students</span><span class="p">)</span>
@@ -11922,7 +11922,7 @@ This is a classification problem because we have a binary outcome, where a stude
 Number of features: 30
 Number of students who passed: 265
 Number of students who failed: 130
-Graduation rate of the class: 0.67%
+Graduation rate of the class: 67.09%
 </pre>
 </div>
 </div>
@@ -11945,7 +11945,7 @@ Graduation rate of the class: 0.67%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -12027,7 +12027,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12098,7 +12098,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -12263,7 +12263,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12338,7 +12338,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12382,31 +12382,31 @@ Testing set has 95 samples.
 <pre>
 
 Training a GradientBoostingClassifier using a training set size of 100. . .
-Trained model in 0.0652 seconds
-Made predictions in 0.0008 seconds.
+Trained model in 0.0672 seconds
+Made predictions in 0.0026 seconds.
 F1 score for training set: 1.0000.
-Made predictions in 0.0007 seconds.
-F1 score for test set: 0.7612.
+Made predictions in 0.0004 seconds.
+F1 score for test set: 0.7761.
 
 
 Training a GradientBoostingClassifier using a training set size of 200. . .
-Trained model in 0.0722 seconds
+Trained model in 0.0713 seconds
 Made predictions in 0.0007 seconds.
 F1 score for training set: 0.9852.
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0004 seconds.
 F1 score for test set: 0.7820.
 
 
 Training a GradientBoostingClassifier using a training set size of 300. . .
-Trained model in 0.0795 seconds
-Made predictions in 0.0011 seconds.
+Trained model in 0.0928 seconds
+Made predictions in 0.0012 seconds.
 F1 score for training set: 0.9740.
-Made predictions in 0.0004 seconds.
+Made predictions in 0.0005 seconds.
 F1 score for test set: 0.7727.
 
 
 Training a LogisticRegression using a training set size of 100. . .
-Trained model in 0.0009 seconds
+Trained model in 0.0046 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 0.8571.
 Made predictions in 0.0002 seconds.
@@ -12414,7 +12414,7 @@ F1 score for test set: 0.7612.
 
 
 Training a LogisticRegression using a training set size of 200. . .
-Trained model in 0.0017 seconds
+Trained model in 0.0018 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 0.8380.
 Made predictions in 0.0002 seconds.
@@ -12425,29 +12425,29 @@ Training a LogisticRegression using a training set size of 300. . .
 Trained model in 0.0025 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 0.8381.
-Made predictions in 0.0002 seconds.
+Made predictions in 0.0001 seconds.
 F1 score for test set: 0.7910.
 
 
 Training a GaussianNB using a training set size of 100. . .
 Trained model in 0.0007 seconds
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0006 seconds.
 F1 score for training set: 0.8550.
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0005 seconds.
 F1 score for test set: 0.7481.
 
 
 Training a GaussianNB using a training set size of 200. . .
-Trained model in 0.0008 seconds
-Made predictions in 0.0003 seconds.
+Trained model in 0.0009 seconds
+Made predictions in 0.0004 seconds.
 F1 score for training set: 0.8321.
-Made predictions in 0.0003 seconds.
+Made predictions in 0.0004 seconds.
 F1 score for test set: 0.7132.
 
 
 Training a GaussianNB using a training set size of 300. . .
-Trained model in 0.0009 seconds
-Made predictions in 0.0004 seconds.
+Trained model in 0.0013 seconds
+Made predictions in 0.0005 seconds.
 F1 score for training set: 0.8088.
 Made predictions in 0.0003 seconds.
 F1 score for test set: 0.7500.
@@ -12665,7 +12665,7 @@ The final model is going to use the attributes for each student and output a pro
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -12707,10 +12707,18 @@ The final model is going to use the attributes for each student and output a pro
 
 
 <div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/stassajin/anaconda/lib/python2.7/site-packages/sklearn/metrics/classification.py:1113: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no predicted samples.
+  &#39;precision&#39;, &#39;predicted&#39;, average, warn_for)
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Made predictions in 0.0002 seconds.
+<pre>Made predictions in 0.0004 seconds.
 Tuned model has a training F1 score of 0.8267.
-Made predictions in 0.0002 seconds.
+Made predictions in 0.0003 seconds.
 Tuned model has a testing F1 score of 0.7917.
 
 
@@ -12718,7 +12726,7 @@ Tuned model has a testing F1 score of 0.7917.
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[40]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
