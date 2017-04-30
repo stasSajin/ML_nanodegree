@@ -8,7 +8,7 @@ class LearningAgent(Agent):
     """ An agent that learns to drive in the Smartcab world.
         This is the object you will be modifying. """
 
-    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.6):
+    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.4):
         super(LearningAgent, self).__init__(env)     # Set the agent in the evironment
         self.planner = RoutePlanner(self.env, self)  # Create a route planner
         self.valid_actions = self.env.valid_actions  # The set of valid actions
@@ -42,8 +42,8 @@ class LearningAgent(Agent):
             self.alpha = 0
             self.epsilon = 0
         else:
-            # self.epsilon -= 0. # linear decay
-            self.epsilon =  math.cos(0.005*self.trial)
+            self.epsilon -= 0.05 # linear decay
+            #self.epsilon =  math.cos(0.005*self.trial)
         self.trial += 1
         return None
 
@@ -120,12 +120,14 @@ class LearningAgent(Agent):
             # if waypoint is left, the light is green and there is no oncoming car, the action should be left
             elif self.state[0] == 'green' and self.state[1] == "left" and self.state[2] == None:
                     action = 'left'
+            # Otherwise, if a random number is smaller than epsilon, chose a random action to explore the space
+            elif random.random() < self.epsilon :
+                action = random.choice(self.valid_actions)
+            # otherwise chose the action with the highest score
             else:
-        #   Otherwise, choose an action with the highest Q-value for the current state
                 maxQ = self.get_maxQ(state)
+                #make a random choice if there multiple actions have maxQ
                 action = random.choice([k for k in self.Q[state] if self.Q[state][k] == maxQ])
-
-
         return action
 
 
@@ -192,7 +194,7 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     sim = Simulator(env, update_delay = 0.0001, log_metrics = True, display = False,
-                    optimized = True)
+                    optimized = False)
 
     ##############
     # Run the simulator
