@@ -42,8 +42,8 @@ class LearningAgent(Agent):
             self.alpha = 0
             self.epsilon = 0
         else:
-            self.epsilon -= 0.05 # linear decay
-            #self.epsilon =  math.cos(0.005*self.trial)
+            #self.epsilon -= 0.05 # linear decay
+            self.epsilon =  math.cos(0.002*self.trial)
         self.trial += 1
         return None
 
@@ -111,23 +111,14 @@ class LearningAgent(Agent):
         # When not learning, choose a random action
         if self.learning == False:
             action = random.choice(self.valid_actions)
-        # otherwise reduce the state space and pick an action
+        # Otherwise, if a random number is smaller than epsilon, chose a random action to explore the space
+        elif random.random() < self.epsilon :
+            action = random.choice(self.valid_actions)
+        # otherwise chose the action with the highest score
         else:
-            # if waypoint is forward or right and the light is green, then the action should be foward;
-            # this eliminates the need to examine the effect of oncoming and left traffic
-            if self.state[0] == 'green' and (self.state[1] == "forward" or self.state[1] == "right"):
-                    action = self.state[1]
-            # if waypoint is left, the light is green and there is no oncoming car, the action should be left
-            elif self.state[0] == 'green' and self.state[1] == "left" and self.state[2] == None:
-                    action = 'left'
-            # Otherwise, if a random number is smaller than epsilon, chose a random action to explore the space
-            elif random.random() < self.epsilon :
-                action = random.choice(self.valid_actions)
-            # otherwise chose the action with the highest score
-            else:
-                maxQ = self.get_maxQ(state)
-                #make a random choice if there multiple actions have maxQ
-                action = random.choice([k for k in self.Q[state] if self.Q[state][k] == maxQ])
+            maxQ = self.get_maxQ(state)
+            #make a random choice if multiple actions have maxQ
+            action = random.choice([k for k in self.Q[state] if self.Q[state][k] == maxQ])
         return action
 
 
@@ -194,7 +185,7 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     sim = Simulator(env, update_delay = 0.0001, log_metrics = True, display = False,
-                    optimized = False)
+                    optimized = True)
 
     ##############
     # Run the simulator
