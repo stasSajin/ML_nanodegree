@@ -8,7 +8,7 @@ class LearningAgent(Agent):
     """ An agent that learns to drive in the Smartcab world.
         This is the object you will be modifying. """
 
-    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.4):
+    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.5):
         super(LearningAgent, self).__init__(env)     # Set the agent in the evironment
         self.planner = RoutePlanner(self.env, self)  # Create a route planner
         self.valid_actions = self.env.valid_actions  # The set of valid actions
@@ -42,8 +42,8 @@ class LearningAgent(Agent):
             self.alpha = 0
             self.epsilon = 0
         else:
-            #self.epsilon -= 0.05 # linear decay
-            self.epsilon =  math.cos(0.002*self.trial)
+            self.epsilon -= 0.05 # linear decay
+            # self.epsilon =  math.cos(0.002*self.trial)
         self.trial += 1
         return None
 
@@ -91,9 +91,10 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        if state not in self.Q:
-            self.Q[state] = {k: 0.0 for k in self.valid_actions}
-        return
+        if self.learning:
+            if state not in self.Q:
+                self.Q[state] = {k: 0.0 for k in self.valid_actions}
+            return
 
 
     def choose_action(self, state):
@@ -133,7 +134,8 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         #self.Q[state][action] = self.alpha * reward + (1 - self.alpha) * self.Q[state][action]
-        self.Q[state][action] += self.alpha * (reward - self.Q[state][action])
+        if self.learning:
+            self.Q[state][action] += self.alpha * (reward - self.Q[state][action])
         return
 
 
@@ -185,7 +187,7 @@ def run():
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
     sim = Simulator(env, update_delay = 0.0001, log_metrics = True, display = False,
-                    optimized = True)
+                    optimized = False)
 
     ##############
     # Run the simulator
