@@ -11865,7 +11865,7 @@ div#notebook {
 <ul>
 <li>The agent is not moving at all during the simulation.</li>
 <li>The agent is recieving positive and negative rewards that vary in their magnitude.</li>
-<li>The agent is recieving a positive reward when no action is taken at a red light and a negative reward if the car is not moving when the light is green. Hence the light color does affect the reward function.</li>
+<li>The agent is recieving a positive reward when no action is taken at a red light and a negative reward if the car is not moving when the light is green and the car has the right-of-way. Hence the light color does affect the reward function.</li>
 </ul>
 
 </div>
@@ -11905,7 +11905,7 @@ div#notebook {
 <p>agent.py:</p>
 <ul>
 <li>flag 1: <code>learning</code> parameter specifies if the agent is expected to learn. It takes a boolean value, and has the default <code>False</code>.  </li>
-<li>flag 2: <code>alpha</code> parameter represents the learning rate. It has the default value set at 0.5. The learning rate specifies how much weight the agent should put on prior learning. A value of 0 makes the agent ignore previous information. A value of 1 makes the agent repeat the same action from previous step.</li>
+<li>flag 2: <code>alpha</code> parameter represents the learning rate. It has the default value set at 0.5. The learning rate specifies how much weight the agent should put on prior learning. A value of 1 makes the agent ignore previous information. A value of 0 makes the agent pick a random action from the list of available actions.</li>
 <li>flag 3: <code>epsilon</code> parameter specifies how likely is the agent prone to perform a random action. The default is set at 1, which means that the agent will always perform a random action. The purpose of this action is to encourage the agent to explore the paramater space, in case the agent gets stuck at a non-optimal local solution.</li>
 </ul>
 <p>environment.py: 
@@ -13064,7 +13064,7 @@ VkVOsszMzMzMzKrISZaZmZmZmVkVOckyMzMzMzOrIidZZmZmZmZmVeQky8zMzMzMrIr+BwS04iAO
 <ul>
 <li><code>'waypoint'</code>, which is the direction the <em>Smartcab</em> should drive leading to the destination, relative to the <em>Smartcab</em>'s heading.</li>
 <li><code>'inputs'</code>, which is the sensor data from the <em>Smartcab</em>. It includes <ul>
-<li><code>'light'</code>, the color of the light.</li>
+<li><code>'light'</code>, the color of the light. Can either be red or green.</li>
 <li><code>'left'</code>, the intended direction of travel for a vehicle to the <em>Smartcab</em>'s left. Returns <code>None</code> if no vehicle is present.</li>
 <li><code>'right'</code>, the intended direction of travel for a vehicle to the <em>Smartcab</em>'s right. Returns <code>None</code> if no vehicle is present.</li>
 <li><code>'oncoming'</code>, the intended direction of travel for a vehicle across the intersection from the <em>Smartcab</em>. Returns <code>None</code> if no vehicle is present.</li>
@@ -13093,6 +13093,7 @@ VkVOsszMzMzMzKrISZaZmZmZmVkVOckyMzMzMzOrIidZZmZmZmZmVeQky8zMzMzMrIr+BwS04iAO
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <p>The features that are relevant for efficiency are <code>waypoint</code> and <code>deadline</code>. Without a direction for where the agent should drive, it will not reach the destination efficiently. The analogy of waypoint is giving the agent a GPS in order to reach the destination. Therefore, <code>waypoint</code> is likely a more important feature in learning efficiency. <code>deadline</code> is less important because <code>deadline</code> without <code>waypoint</code> is an agent that is rushing fast towards an unknown destination.</p>
+<p>Deadline is excluded from the the input to the possible states in order to keep the state space manageable. Including the deadline as an input increases the state space and might make learning rate of the agent slower. For instance, if assume that deadline can take any of the 20 values for each of the twenty steps, then we have to increase the state space by x20.</p>
 <p>The <code>inputs</code> are important for learning safety, since they esentially help the agent examine the behavior of other agents (i.e., cars) in the environment and how to act when the light is green/red. The only input that is not relevant during learning is the intended direction of the trafic to the right of the agent.</p>
 
 </div>
@@ -17048,8 +17049,9 @@ One example where the agent is learning the correct policy is when the agent lea
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
-The future state of the environemnt explodes with possibilities, since at each waypoint there are other agents that can influence the reward matrix. In other words, in order to account for future rewards, we need to account for how each dummy agent could behave. This creates a state space that is too large for the agent to learn in a reasonable number of trials.</p>
+The future state of the environment explodes with possibilities, since at each waypoint there are other agents that can influence the reward matrix. In other words, in order to account for future rewards, we need to account for how each dummy agent could behave. This creates a state space that is too large for the agent to learn in a reasonable number of trials.</p>
 <p>Moreover, there is also the issue that the agent doesn't know how the grid looks at a particular point in time. It would need to have some type of internal GPS that account for possible future traffic and delays based on the density of dummy agents on the grid. In other words, the environment itself is unpredictable, hence trying to account for future rewards would not be beneficial.</p>
+<p>The second issue is that the destination changes from trial to trial,</p>
 
 </div>
 </div>
