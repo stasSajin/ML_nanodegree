@@ -1,9 +1,9 @@
 .DS_Store
 .ipynb_checkpoints
 
-# r files
-*/.Rproj.user
-*/.Rhistory
+# R files
+.Rproj.user
+.Rhistory
 
 # files
 *.csv
