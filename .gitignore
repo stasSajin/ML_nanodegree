@@ -1,3 +1,10 @@
 .DS_Store
 .ipynb_checkpoints
 
+# R files
+.Rproj.user
+.Rhistory
+.RData
+
+# files
+*.csv
