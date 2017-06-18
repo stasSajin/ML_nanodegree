@@ -4,6 +4,7 @@
 # R files
 .Rproj.user
 .Rhistory
+.RData
 
 # files
 *.csv
